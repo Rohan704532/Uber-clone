@@ -12,6 +12,8 @@ module.exports.registerUser = async (req, res, next) => {
 
     const { fullname, email, password } = req.body;
 
+    console.log(fullname, email, password)
+
     const isUserAlready = await userModel.findOne({ email });
 
     if (isUserAlready) {
@@ -49,7 +51,7 @@ module.exports.loginUser = async (req, res, next) => {
         return res.status(401).json({ message: 'Invalid email or password' });
     }
 
-    const isMatch = await user.comparePassword(password);
+    const isMatch = await user.comparedPassword(password);
 
     if (!isMatch) {
         return res.status(401).json({ message: 'Invalid email or password' });
@@ -70,7 +72,7 @@ module.exports.getUserProfile = async (req, res, next) => {
 
 module.exports.logoutUser = async (req, res, next) => {
     res.clearCookie('token');
-    const token = req.cookies.token || req.headers.authorization.split(' ')[ 1 ];
+    const token = req.cookies.token || req.headers.authorization.split(' ')[1];
 
     await blackListTokenModel.create({ token });
 
