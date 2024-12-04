@@ -11,6 +11,8 @@ import axios from 'axios'
 import { SocketContext } from '../context/SocketContext';
 import { UserDataContext } from '../context/UserContext';
 import { useContext } from 'react';
+import { useNavigate } from 'react-router-dom';
+import LiveTracking from '../components/LiveTracking';
 
 const Home = () => {
   const [pickup, setPickup] = useState();
@@ -33,6 +35,7 @@ const Home = () => {
   const [vehicleType, setVehicleType] = useState(null)
   const [ride, setRide] = useState(null)
 
+  const navigate = useNavigate()
   const { socket } = useContext(SocketContext)
   const { user } = useContext(UserDataContext)
 
@@ -47,7 +50,6 @@ const Home = () => {
   })
 
   socket.on('ride-started', ride => {
-    console.log("ride")
     setWaitingForDriver(false)
     navigate('/riding', { state: { ride } }) 
   })
@@ -186,7 +188,7 @@ const Home = () => {
     <div className='h-screen relative overflow-hidden'>
       <img className='w-16 absolute left-5 top-5' src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png" alt="" />
       <div className='h-screen w-screen'>
-        <img className='h-full w-full object-cover' src="https://www.medianama.com/wp-content/uploads/2018/06/Screenshot_20180619-112715.png.png" alt="" />
+        <LiveTracking/>
       </div>
       <div className='flex flex-col justify-end h-screen absolute top-0 w-full'>
         <div className='h-[30%] p-6 bg-white relative'>
