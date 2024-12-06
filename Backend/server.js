@@ -5,8 +5,16 @@ const port = process.env.PORT || 3000
 
 const server = http.createServer(app);
 
-initializeSocket(server);
+const io = require('socket.io')(server, {
+    cors: {
+        origin: "https://uber-clone-frontend.onrender.com",
+        methods: ["GET", "POST"],
+        credentials: true
+    }
+});
 
-server.listen(port,()=>{
-    console.log(`Server is runnign ${port}`)
+initializeSocket(io);
+
+server.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
 });
