@@ -50,11 +50,10 @@ const LiveTracking = () => {
         updatePosition(); // Initial position update
 
         const intervalId = setInterval(updatePosition, 1000); // Update every 10 seconds
-
     }, []);
 
     return (
-        <LoadScript googleMapsApiKey={import.meta.env.GOOGLE_MAPS_API}>
+        <LoadScript googleMapsApiKey={import.meta.env.VITE_GOOGLE_MAPS_API}>
             <GoogleMap
                 mapContainerStyle={containerStyle}
                 center={currentPosition}
