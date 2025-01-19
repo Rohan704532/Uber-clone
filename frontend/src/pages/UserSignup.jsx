@@ -6,11 +6,11 @@ import { UserDataContext } from '../context/UserContext'
 
 
 const UserSignup = () => {
-  const [ email, setEmail ] = useState('')
-  const [ password, setPassword ] = useState('')
-  const [ firstName, setFirstName ] = useState('')
-  const [ lastName, setLastName ] = useState('')
-  const [ userData, setUserData ] = useState({})
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
+  const [firstName, setFirstName] = useState('')
+  const [lastName, setLastName] = useState('')
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const navigate = useNavigate()
 
@@ -18,6 +18,7 @@ const UserSignup = () => {
 
 
   const submitHandler = async (e) => {
+    setLoggedIn(true);
     e.preventDefault()
     const newUser = {
       fullname: {
@@ -103,7 +104,7 @@ const UserSignup = () => {
 
             <button
               className='bg-[#111] text-white font-semibold mb-3 rounded-lg px-4 py-2 w-full text-lg placeholder:text-base'
-            >Create account</button>
+            >{loggedIn ? 'Loading':'Create Account'}</button>
 
           </form>
           <p className='text-center'>Already have a account? <Link to='/login' className='text-blue-600'>Login here</Link></p>

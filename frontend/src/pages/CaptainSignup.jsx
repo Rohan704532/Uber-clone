@@ -17,12 +17,14 @@ const CaptainSignup = () => {
   const [ vehiclePlate, setVehiclePlate ] = useState('')
   const [ vehicleCapacity, setVehicleCapacity ] = useState('')
   const [ vehicleType, setVehicleType ] = useState('')
+    const [loggedIn, setLoggedIn] = useState(false);
 
 
   const { captain, setCaptain } = React.useContext(CaptainDataContext)
 
 
   const submitHandler = async (e) => {
+    setLoggedIn(true);
     e.preventDefault()
     const captainData = {
       fullname: {
@@ -166,7 +168,7 @@ const CaptainSignup = () => {
 
           <button
             className='bg-[#111] text-white font-semibold mb-3 rounded-lg px-4 py-2 w-full text-lg placeholder:text-base'
-          >Create Captain Account</button>
+          >{loggedIn ? 'Loading':'Create Captain Account'}</button>
 
         </form>
         <p className='text-center'>Already have a account? <Link to='/captain-login' className='text-blue-600'>Login here</Link></p>

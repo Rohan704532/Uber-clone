@@ -6,12 +6,13 @@ import axios from 'axios';
 const CaptainLogin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [captainData, setCaptainData] = useState({});
-  const { captain, setCaptain } = React.useContext(CaptainDataContext)
+  const { captain, setCaptain } = React.useContext(CaptainDataContext);
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const navigate = useNavigate();
 
   const submitHandler = async (e) => {
+    setLoggedIn(true);
     e.preventDefault();
     const captain = ({
       email,
@@ -54,7 +55,7 @@ const CaptainLogin = () => {
           />
           <button className='bg-[#111] text-white font-semibold mb-3 rounded px-4 py-2 w-full text-lg placeholder:text-base'>Login</button>
         </form>
-        <p className='text-center'>Join a fleet? <Link to="/captain-signup" className='text-blue-600'>Register as a captain</Link></p>
+        <p className='text-center'>Join a fleet? <Link to="/captain-signup" className='text-blue-600'>{loggedIn ? 'Loading':'Register as a captain'}</Link></p>
       </div>
       <div>
         <Link to='/login' className='bg-[#111] flex items-center justify-center text-white font-semibold mb-7 rounded px-4 py-2 w-full text-lg placeholder:text-base'>Sign in as User</Link>

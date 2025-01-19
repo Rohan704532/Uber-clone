@@ -7,7 +7,7 @@ import axios from 'axios';
 const UserLogin = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [userData, setUserData] = useState({});
+  const [loggedIn, setLoggedIn] = useState(false);
 
   const navigate = useNavigate();
 
@@ -15,6 +15,7 @@ const UserLogin = () => {
 
 
   const submitHandler = async (e) => {
+    setLoggedIn(true);
     e.preventDefault();
     const userData = {
       email,
@@ -56,7 +57,7 @@ const UserLogin = () => {
             type="password"
             placeholder='password'
           />
-          <button className='bg-[#111] text-white font-semibold mb-3 rounded px-4 py-2 w-full text-lg placeholder:text-base'>Login</button>
+          <button className='bg-[#111] text-white font-semibold mb-3 rounded px-4 py-2 w-full text-lg placeholder:text-base'>{loggedIn ? 'Loading':'Log In'}</button>
         </form>
         <p className='text-center'>New here? <Link to="/signup" className='text-blue-600'>Create new Account</Link></p>
       </div>
